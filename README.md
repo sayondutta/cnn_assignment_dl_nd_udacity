@@ -1,1 +1,1 @@
-# additional images used are in the path images/Untitled Folder/
+additional images used are in the path images/Untitled Folder/
