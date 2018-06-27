@@ -12106,25 +12106,11 @@ There are 836 test dog images.
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Question 2:</strong> This algorithmic choice necessitates that we communicate to the user that we accept human images only when they provide a clear view of a face (otherwise, we risk having unneccessarily frustrated users!). In your opinion, is this a reasonable expectation to pose on the user? If not, can you think of a way to detect humans in images that does not necessitate an image with a clearly presented face?</p>
 <p><strong>Answer:</strong></p>
-<p>We suggest the face detector from OpenCV as a potential way to detect human images in your algorithm, but you are free to explore other approaches, especially approaches that make use of deep learning :).  Please use the code cell below to design and test your own face detection algorithm.  If you decide to pursue this <em>optional</em> task, report performance on each of the datasets.</p>
+<p>The Haar Cascades model is created using full frontal faces to detect full frontal faces, so it might not do well in detecting half faces. In order to detect humans in images with a partially presented face, we could train OpenCV on our object of interest (half faces in this case) with lots of images of half faces. Or we could use Google's OpenFace which is known to do quite well on side profiles.
+Moreover, building our own algorithm based on CNN which could be fed with all kind of images considering real environmental setup too, where the above algorithm used by opencv would give bad results, whereas a good CNN architecture would perform better.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## (Optional) TODO: Report the performance of another  </span>
-<span class="c1">## face detection algorithm on the LFW dataset</span>
-<span class="c1">### Feel free to use as many code cells as needed.</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13201,6 +13187,18 @@ test_{network} = bottleneck_features['test']</code></pre>
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We have already implemented above the VGG and ResNet50. Considering ResNet50, InceptionV3 and Xception in mind, I chose Xception because it's most recent compared to the other good options provided.</p>
+<p>Since Xception is already trained on large amount of data. Therefore, added the following layers:<br>
+Add a Global pooling layer.
+Add a Dense layer with sofftmax activation function to predict the probabilities for 133 dog breed classes/categories.Thus the output of this layer would be a vector having 133 units.</p>
 
 </div>
 </div>
